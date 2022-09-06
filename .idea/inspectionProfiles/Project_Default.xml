@@ -1,0 +1,50 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="23">
+            <item index="0" class="java.lang.String" itemvalue="scikit-learn-intelex" />
+            <item index="1" class="java.lang.String" itemvalue="llvmlite" />
+            <item index="2" class="java.lang.String" itemvalue="beautifulsoup4" />
+            <item index="3" class="java.lang.String" itemvalue="blinker" />
+            <item index="4" class="java.lang.String" itemvalue="Automat" />
+            <item index="5" class="java.lang.String" itemvalue="six" />
+            <item index="6" class="java.lang.String" itemvalue="tornado" />
+            <item index="7" class="java.lang.String" itemvalue="cryptography" />
+            <item index="8" class="java.lang.String" itemvalue="packaging" />
+            <item index="9" class="java.lang.String" itemvalue="constantly" />
+            <item index="10" class="java.lang.String" itemvalue="argparse" />
+            <item index="11" class="java.lang.String" itemvalue="attrs" />
+            <item index="12" class="java.lang.String" itemvalue="chardet" />
+            <item index="13" class="java.lang.String" itemvalue="django" />
+            <item index="14" class="java.lang.String" itemvalue="playwright" />
+            <item index="15" class="java.lang.String" itemvalue="cssselect" />
+            <item index="16" class="java.lang.String" itemvalue="pip" />
+            <item index="17" class="java.lang.String" itemvalue="certifi" />
+            <item index="18" class="java.lang.String" itemvalue="lxml" />
+            <item index="19" class="java.lang.String" itemvalue="soupsieve" />
+            <item index="20" class="java.lang.String" itemvalue="pyparsing" />
+            <item index="21" class="java.lang.String" itemvalue="djangorestframework" />
+            <item index="22" class="java.lang.String" itemvalue="Twisted" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N806" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="DRINKS.views" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
