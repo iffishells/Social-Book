@@ -1,12 +1,14 @@
+from django.contrib import messages
+from django.contrib.auth.models import User, auth
 from django.shortcuts import render, redirect
 
 from .models import Profile
-from django.contrib.auth.models import User, auth
-from django.contrib import messages
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+
+@login_required(login_url='sign_in')
 def index(request):
     return render(request, 'index.html')
 
@@ -40,6 +42,7 @@ def sign_up(request):
                 new_profile = Profile.objects.create(user=user_model,
                                                          id_user =user_model.id)
                 new_profile.save()
+                messages.info(request,'Your account has Successfully created!')
                 return redirect('sign_up')
         else:
             messages.info(request, 'Passwords are not match')
@@ -47,3 +50,24 @@ def sign_up(request):
 
     else:
         return render(request, 'signup.html')
+
+def sign_in(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = auth.authenticate(username=username, password=password)
+
+        if user is not None:
+            auth.login(request, user)
+            return redirect('/')
+        else:
+            messages.info(request, 'Credentials are not Valid')
+            return redirect('sign_in')
+
+    return render(request, 'signin.html')
+
+
+@login_required(login_url='SignIn')
+def logout(request):
+    return redirect('/SignIn')
