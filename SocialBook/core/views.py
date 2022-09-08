@@ -3,7 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, auth
 from django.shortcuts import render, redirect
 
-from .models import Profile
+# models
+from .models import Profile, Post
 
 
 # Create your views here.
@@ -11,7 +12,9 @@ from .models import Profile
 
 @login_required(login_url='sign_in')
 def index(request):
-    return render(request, 'index.html')
+    user_object = User.objects.get(username=request.user.username)
+    user_profile = Profile.objects.get(user=user_object)
+    return render(request, 'index.html', {'user_profile': user_profile})
 
 
 def sign_up(request):
@@ -55,6 +58,7 @@ def sign_up(request):
     else:
         return render(request, 'signup.html')
 
+
 def sign_in(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -80,18 +84,18 @@ def logout(request):
 @login_required(login_url='sign_in')
 def setting(request):
     User_Profile = Profile.objects.get(user=request.user)
-    if request.method =='POST':
+    if request.method == 'POST':
 
-        if request.FILES.get('image')==None:
+        if request.FILES.get('image') is None:
             image = User_Profile.profile_img
-            bio = request.POST['bio']
-            location = request.POST['location']
+            bio = request.POST.get('bio', False)
+            location = request.POST.get('location', False)
 
             User_Profile.profile_img = image
             User_Profile.bio = bio
             User_Profile.location = location
             User_Profile.save()
-        if request.FILES.get('image')!=None:
+        if request.FILES.get('image') != None:
             image = request.FILES.get('image')
             bio = request.POST['bio']
             location = request.POST['location']
@@ -103,3 +107,17 @@ def setting(request):
         return redirect('/Setting')
 
     return render(request, 'setting.html', {'User_Profile': User_Profile})
+
+
+def upload(request):
+    print(request)
+    if request.method == 'POST':
+        user = request.user.username
+        caption = request.POST.get('catpion', False)
+        image = request.FILES.get('image_upload')
+        print('---------------------------------------------------------------------------')
+        user_profile_post = Post.objects.create(user=user, caption=caption, image=image)
+        user_profile_post.save()
+        return redirect('/')
+    else:
+        return redirect('/')
