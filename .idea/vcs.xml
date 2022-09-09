@@ -2,6 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/SocialBook" vcs="" />
     <mapping directory="$PROJECT_DIR$/django-social-media-template" vcs="Git" />
   </component>
 </project>
