@@ -14,5 +14,12 @@ Social Book is a Web App like facebook its has different purpose.It has almost a
 Social book built using **Django Framework**. I forced myself to follow the Django framework Architecture **MVC**  
 Model View Controller.
 
+## Frontend Vibes
+* <img src="SS/ss-2.png"
+     alt="Markdown Monster icon"
+     style="float: left; margin-right: 10px;" />
+* ![MarineGEO circle logo](/SS/ss-2.png "MarineGEO logo")
+
 ## Future Work
 Plan to make it for the public Use.
+
