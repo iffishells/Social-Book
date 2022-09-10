@@ -15,11 +15,19 @@ Social book built using **Django Framework**. I forced myself to follow the Djan
 Model View Controller.
 
 ## Frontend Vibes
-* <img src="SS/ss-2.png"
-     alt="Markdown Monster icon"
-     style="float: left; margin-right: 10px;" />
-* ![MarineGEO circle logo](/SS/ss-2.png "MarineGEO logo")
+* <img src="https://github.com/iffishells/Social-Book/blob/90b6612a16b6be16aab46c59923ebfde4196830d/SS/ss-2.png"  
+     alt="Markdown Monster icon"  
+     style="float: left; margin-right: 10px;" />  
 
+ *    <img src="https://github.com/iffishells/Social-Book/blob/90b6612a16b6be16aab46c59923ebfde4196830d/SS/ss-3.png"  
+     alt="Markdown Monster icon"  
+     style="float: left; margin-right: 10px;" />  
+     
+  *   <img src="https://github.com/iffishells/Social-Book/blob/90b6612a16b6be16aab46c59923ebfde4196830d/SS/ss-4.png"  
+     alt="Markdown Monster icon"  
+     style="float: left; margin-right: 10px;" />  
+     
+     
 ## Future Work
 Plan to make it for the public Use.
 
