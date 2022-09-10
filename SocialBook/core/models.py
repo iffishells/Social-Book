@@ -1,7 +1,8 @@
-from django.contrib.auth import get_user_model
-from django.db import models
 import uuid
 from datetime import datetime
+
+from django.contrib.auth import get_user_model
+from django.db import models
 
 # Create your models here.
 
@@ -31,3 +32,20 @@ class Post(models.Model):
 
     def __str__(self):
         return self.user
+
+
+class LikePost(models.Model):
+    post_id = models.CharField(max_length=500)
+    username = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.username
+
+
+class FollowerCount(models.Model):
+    # follower model for each user
+    follower = models.CharField(max_length=500)
+    username = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.username

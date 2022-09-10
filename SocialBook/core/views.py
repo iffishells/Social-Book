@@ -4,7 +4,7 @@ from django.contrib.auth.models import User, auth
 from django.shortcuts import render, redirect
 
 # models
-from .models import Profile, Post
+from .models import Profile, Post, LikePost, FollowerCount
 
 
 # Create your views here.
@@ -14,7 +14,11 @@ from .models import Profile, Post
 def index(request):
     user_object = User.objects.get(username=request.user.username)
     user_profile = Profile.objects.get(user=user_object)
-    return render(request, 'index.html', {'user_profile': user_profile})
+
+    # getting all the user option
+    post = Post.objects.all()
+    return render(request, 'index.html', {'user_profile': user_profile,
+                                          'post': post})
 
 
 def sign_up(request):
@@ -50,7 +54,7 @@ def sign_up(request):
                                                      id_user=user_model.id)
                 new_profile.save()
                 messages.info(request, 'Your account has Successfully created!')
-                return redirect('Setting')
+                return redirect('/')
         else:
             messages.info(request, 'Passwords are not match')
             return redirect('sign_up')
@@ -108,16 +112,78 @@ def setting(request):
 
     return render(request, 'setting.html', {'User_Profile': User_Profile})
 
-
+@login_required(login_url='sign_in')
 def upload(request):
     print(request)
     if request.method == 'POST':
         user = request.user.username
-        caption = request.POST.get('catpion', False)
+        caption = request.POST['caption']
         image = request.FILES.get('image_upload')
         print('---------------------------------------------------------------------------')
         user_profile_post = Post.objects.create(user=user, caption=caption, image=image)
         user_profile_post.save()
         return redirect('/')
+    else:
+        return redirect('/')
+
+@login_required(login_url='sign_in')
+def like_post(request):
+    print('like post method request received')
+    username = request.user.username
+    post_id = request.GET.get('post_id')
+
+    post = Post.objects.get(id=post_id)
+
+    like_filter = LikePost.objects.filter(post_id=post_id, username=username).first()
+
+    if like_filter is None:
+        new_like = LikePost.objects.create(post_id=post_id, username=username)
+        new_like.save()
+
+        post.no_of_like = post.no_of_like + 1
+        post.save()
+        return redirect('/')
+    else:
+        like_filter.delete()
+        post.no_of_like = post.no_of_like - 1
+        post.save()
+        return redirect('/')
+
+@login_required(login_url='sign_in')
+def profile(request, pk):
+    user_object = User.objects.get(username=pk)
+    user_profile = Profile.objects.get(user=user_object)
+    user_post = Post.objects.filter(user=pk)
+
+    user_follower = request.user.username
+    user = pk
+    if FollowerCount.objects.filter(follower = user_follower,username=user).first():
+        button_text = 'Unfollow'
+    else:
+        button_text = 'Following'
+    context = {
+        'user_object': user_object,
+        'user_profile': user_profile,
+        'user_post': user_post,
+        'user_post_len': len(user_post),
+        'button_text':button_text
+    }
+    return render(request, 'profile.html', context)
+
+@login_required(login_url='sign_in')
+def follower(request):
+    if request.method is 'POST':
+        user_follower = request.POST['follower']
+        user = request.POST['user']
+        print(f' follower {user_follower} and user {user}')
+
+        if FollowerCount.objects.filter(follower=user_follower, user=user).first():
+            delete_follower = FollowerCount.objects.get(follower=user_follower, user=user)
+            delete_follower.delete()
+            return redirect('/profile/' + user)
+        else:
+            new_follower = FollowerCount.objects.create(follower=user_follower, user=user)
+            new_follower.save()
+            return redirect('/profile/' + user)
     else:
         return redirect('/')
