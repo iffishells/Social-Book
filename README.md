@@ -1,4 +1,4 @@
-# Social-Book
+# Social-Book (Using Django Framework)
 Social Book is a Web App like facebook its has different purpose.It has almost all the functions like facebook  
 * Follower Module
 * Following Module
